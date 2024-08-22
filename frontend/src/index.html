@@ -50,14 +50,14 @@
          ** and the CSS documentation under Support/API Docs/Non-Component Styling
          ** on the JET website for more information on how to use this pattern.
       -->
-      <header role="banner" class="oj-web-applayout-header">
+      <!-- <header role="banner" class="oj-web-applayout-header">
         <div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center">
           <div class="oj-flex-bar-middle oj-sm-align-items-baseline">
             <span role="img" class="oj-icon demo-oracle-icon" title="Oracle Logo" alt="Oracle Logo"></span>
             <h1 class="oj-sm-only-hide oj-web-applayout-header-title" title="Application Name"><oj-bind-text value="[[appName]]"></oj-bind-text></h1>
           </div>
           <div class="oj-flex-bar-end">
-            <!-- Responsive Toolbar -->
+            Responsive Toolbar
             <oj-toolbar>
               <oj-menu-button id="userMenu" display="[[smScreen() ? 'icons' : 'all']]" chroming="borderless">
                 <span><oj-bind-text value="[[userLogin]]"></oj-bind-text></span>
@@ -72,11 +72,99 @@
             </oj-toolbar>
           </div>
         </div>
-      </header>
+      </header> -->
       <div role="main" class="oj-web-applayout-max-width oj-web-applayout-content">
-        <!-- Place your page content here -->
+        <h1>Your Todolist</h1>
+
+        <div id="div1" class="oj-flex oj-sm-flex-items-initial">
+
+          <div style="width:500px" class="oj-flex-item oj-sm-padding-2x-horizontal">
+            <oj-input-text
+            id="text-input"
+            value="{{value}}"
+            label-hint="Enter Todo"
+            label-edge="inside">
+          
+          </oj-input-text>
+          </div>
+
+          <div class="oj-flex-item oj-sm-padding-4x-horizontal">
+
+            <span>
+              <oj-button id="chroming_button4" chroming="callToAction">Add Todo</oj-button>
+  
+            </span>
+          </div>
+
+        
+
+         
+
+        </div>
+
+        <oj-table
+        id="table"
+        aria-label="Employee Table"
+        accessibility.row-header="name"
+        class="demo-table-container"
+        data="[[dataprovider]]"
+        selection-mode='{"row": "multiple"}'
+        scroll-policy="loadMoreOnScroll"
+        scroll-policy-options='{"fetchSize": 10}'
+        columns-default.resizable="disabled"
+        columns-default.sortable="disabled"
+        columns='[{"headerText": "Todo Id", 
+                   "field": "EmployeeId",
+                   "frozenEdge": "start",
+                   "id": "id"},
+                  {"headerText": "Todo title",
+                   "template": "empNameTemplate",
+                   "minWidth": "12rem",
+                   "id": "name"},
+                  
+                  
+                  
+                  
+                  {"headerText": "Status", 
+                   "field": "Status",
+                   "minWidth": "8rem",
+                   "id": "status"},
+                  {"frozenEdge": "end",
+                    "minWidth": "5rem",
+                    "headerClassName": "oj-helper-text-align-end",
+                    "className":"oj-helper-text-align-end",
+                    "template": "actionTemplate",
+                    "id": "action"}]'
+                    
+                    >
+        <template slot="empNameTemplate" data-oj-as="cell">
+          <oj-bind-text
+            value="[[cell.item.data.FirstName + ' ' + cell.item.data.LastName]]"></oj-bind-text>
+        </template>
+        <template slot="actionTemplate" data-oj-as="cell">
+          <oj-menu-button
+            chroming="borderless"
+            class="oj-button-sm"
+            display="icons"
+            data-oj-clickthrough="disabled">
+            Action
+            <oj-menu slot="menu" on-oj-menu-action="[[menuListener]]">
+            
+              <oj-option value="delete">
+                <span class="oj-ux-ico-delete-circle" slot="startIcon"></span>
+                Delete
+              </oj-option>
+            </oj-menu>
+          </oj-menu-button>
+        </template>
+      </oj-table>
+      
+        
+
+        
+        
       </div>
-      <footer class="oj-web-applayout-footer" role="contentinfo">
+      <!-- <footer class="oj-web-applayout-footer" role="contentinfo">
         <div class="oj-web-applayout-footer-item oj-web-applayout-max-width">
           <ul>
             <oj-bind-for-each data="[[footerLinks]]">
@@ -93,7 +181,7 @@
         <div class="oj-web-applayout-footer-item oj-web-applayout-max-width oj-text-color-secondary oj-typography-body-sm">
           Copyright © 2014, 2024 Oracle and/or its affiliates All rights reserved.
         </div>
-      </footer>
+      </footer> -->
     </div>
 
     <!-- This injects script tags for the main javascript files -->
