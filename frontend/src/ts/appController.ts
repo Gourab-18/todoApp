@@ -88,11 +88,30 @@ class RootViewModel {
     }).then((res) =>res.json()).then((val)=>console.log(val));
   };
 
-  deleteTodo=():any =>{
-
-    console.log("Hii i am in delete")
-
-  }
+  deleteTodo = (id: number): void => {
+    console.log(typeof id);
+    console.log(id);
+  
+    const url = `http://localhost:8080/api/todos/${id}`;
+  
+    fetch(url, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("Todo deleted successfully");
+          this.todoArray.remove((todo:TodoData) => todo.id === id);
+        } else {
+          console.error("Failed to delete todo:", res.statusText);
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting todo:", error);
+      });
+  
+    console.log("Delete operation initiated");
+  };
+  
 
   constructor() {
     // media queries for responsive layouts
