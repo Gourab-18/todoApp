@@ -101,11 +101,17 @@
               label-edge="inside"
             >
             </oj-input-text>
+            <div class="oj-sm-margin-4x-vertical">
+              <span>Current component value is:</span>
+              <span>
+                <oj-bind-text value="{{value}}"></oj-bind-text>
+              </span>
+            </div>
           </div>
 
           <div class="oj-flex-item oj-sm-padding-4x-horizontal">
             <span>
-              <oj-button id="chroming_button4" chroming="callToAction"
+              <oj-button id="chroming_button4" chroming="callToAction"  id="submitButton" on-oj-action="[[submitTodo]]"
                 >Add Todo</oj-button
               >
             </span>
@@ -156,8 +162,14 @@
               Action
               <oj-menu slot="menu" on-oj-menu-action="[[menuListener]]">
                 <oj-option value="delete">
-                  <span class="oj-ux-ico-delete-circle" slot="startIcon"></span>
-                  Delete
+                  <span class="oj-ux-ico-delete-circle" slot="startIcon"   >
+
+                  </span>
+                  <oj-button on-oj-action="[[deleteTodo]]"  chroming="borderless">
+                    Delete
+                  </oj-button>
+                  
+
                 </oj-option>
               </oj-menu>
             </oj-menu-button>

@@ -24,6 +24,7 @@ public class TodoController {
     public Todo getTodoById(@PathVariable Long id) {
         return todoService.getTodoById(id);
     }
+    @CrossOrigin(origins ="http://localhost:9000")
 
     @PostMapping
     public Todo createTodo(@RequestBody Todo todo) {
