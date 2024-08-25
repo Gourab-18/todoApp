@@ -73,7 +73,6 @@
             >
             </oj-input-text>
             <div class="oj-sm-margin-4x-vertical">
-              <span>Current component value is:</span>
               <span>
                 <oj-bind-text value="{{value}}"></oj-bind-text>
               </span>
@@ -113,7 +112,7 @@
                    "frozenEdge": "start",
                    "id": "id"},
                             
-                  {"headerText": "Status", 
+                  {"headerText": "Completion status", 
                    "field": "completed",
                    "minWidth": "8rem",
                    "id": "status"},
@@ -142,6 +141,22 @@
                     chroming="borderless"
                   >
                     Delete
+                  </oj-button>
+
+                  <!-- <oj-button
+                    on-oj-action="[[() => deleteTodo(cell.item.data.id)]]"
+                    chroming="borderless"
+                  >
+                    Change status
+                  </oj-button> -->
+                </oj-option>
+
+                <oj-option value="change">
+                     <oj-button
+                    on-oj-action="[[() => changeStatus(cell.item.data.id,cell.item.data.completed)]]"
+                    chroming="borderless"
+                  >
+                    Change status
                   </oj-button>
                 </oj-option>
               </oj-menu>

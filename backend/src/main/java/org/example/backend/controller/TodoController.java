@@ -39,12 +39,16 @@ public class TodoController {
 
     @PatchMapping("/{id}/complete")
     public ResponseEntity<Todo> updateTodoCompletionStatus(@PathVariable Long id, @RequestBody boolean completed) {
+
+        System.out.println("Update");
         Todo updatedTodo = todoService.updateTodoCompletionStatus(id, completed);
+
         if (updatedTodo != null) {
             return ResponseEntity.ok(updatedTodo);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
+
 
 }

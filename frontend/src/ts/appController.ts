@@ -69,7 +69,7 @@ class RootViewModel {
     }
   };
 
-  submitTodo = (): any => {
+  submitTodo = (): void=> {
     console.log(this.value());
     const temp= {
       description: this.value(),
@@ -85,7 +85,16 @@ class RootViewModel {
         "Content-type": "application/json; charset=UTF-8",
       },
       body: JSON.stringify(temp),
-    }).then((res) =>res.json()).then((val)=>console.log(val));
+    }).then((res) =>res.json()).then((val)=>
+
+      {
+
+        this.refreshTodos()
+
+        this.value("")
+
+
+      })
   };
 
   deleteTodo = (id: number): void => {
@@ -111,6 +120,67 @@ class RootViewModel {
   
     console.log("Delete operation initiated");
   };
+
+  // changeStatus =(id:any, status:any)=>{
+  //   console.log(id)
+  //   console.log(status)
+
+  //   console.log("I am changing status")
+  //   const url=`http://localhost:8080/api/todos/${id}/complete`
+
+  //   fetch(url,{
+  //     method:"PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json; charset=UTF-8",
+  //     },
+  //     body:JSON.stringify(true)
+  //   }).then((res)=>console.log("done"))
+
+  // }
+  changeStatus = (id: any, status: any) => {
+    console.log(id);
+    console.log(status);
+  
+    console.log("I am changing status");
+    const url = `http://localhost:8080/api/todos/${id}/complete`;
+  
+    fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify(!status), // Send the status value dynamically
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("Status updated successfully");
+          this.refreshTodos()
+        } else {
+          console.error("Failed to update status:", res.statusText);
+        }
+      })
+      .catch((error) => {
+        console.error("Error changing status:", error);
+      });
+  };
+
+
+  refreshTodos = (): void => {
+    fetch("http://localhost:8080/api/todos", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((res) => res.json())
+      .then((todos:any) => {
+        this.todoArray(todos); // Update the observable array with the latest todos
+      })
+      .catch((error) => {
+        console.error("Error fetching todos:", error);
+      });
+  };
+
   
 
   constructor() {
@@ -141,6 +211,10 @@ class RootViewModel {
       .then((data) => data.json())
       .then((res) => {
         this.todoArray(res);
+
+
+      
+
 
         // return console.log(res);
       });
