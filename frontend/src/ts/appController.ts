@@ -97,6 +97,11 @@ class RootViewModel {
       })
   };
 
+  addTags=(status:any):void=>{
+    console.log(status)
+
+  }
+
   deleteTodo = (id: number): void => {
     console.log(typeof id);
     console.log(id);
@@ -121,22 +126,7 @@ class RootViewModel {
     console.log("Delete operation initiated");
   };
 
-  // changeStatus =(id:any, status:any)=>{
-  //   console.log(id)
-  //   console.log(status)
 
-  //   console.log("I am changing status")
-  //   const url=`http://localhost:8080/api/todos/${id}/complete`
-
-  //   fetch(url,{
-  //     method:"PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json; charset=UTF-8",
-  //     },
-  //     body:JSON.stringify(true)
-  //   }).then((res)=>console.log("done"))
-
-  // }
   changeStatus = (id: any, status: any) => {
     console.log(id);
     console.log(status);
@@ -211,6 +201,7 @@ class RootViewModel {
       .then((data) => data.json())
       .then((res) => {
         this.todoArray(res);
+        console.log(this.todoArray())
 
 
       

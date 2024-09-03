@@ -116,6 +116,11 @@
                    "field": "completed",
                    "minWidth": "8rem",
                    "id": "status"},
+                   {"headerText": "Tags", 
+                   "template":"tagsTemplate",
+                   "field": "tags",
+                   "minWidth": "50rem",
+                   "id": "status"},
                   {"frozenEdge": "end",
                     "minWidth": "5rem",
                     "headerClassName": "oj-helper-text-align-end",
@@ -134,7 +139,18 @@
               data-oj-clickthrough="disabled"
             >
               Action
+
+              
               <oj-menu slot="menu" on-oj-menu-action="[[menuListener]]">
+                <oj-option value="tags">
+                  <oj-button
+                    on-oj-action="[[() => addTags(cell.item.data)]]"
+                    chroming="borderless"
+                  >
+                    Add Tags
+                  </oj-button>
+
+                </oj-option>
                 <oj-option value="delete">
                   <oj-button
                     on-oj-action="[[() => deleteTodo(cell.item.data.id)]]"
@@ -143,12 +159,6 @@
                     Delete
                   </oj-button>
 
-                  <!-- <oj-button
-                    on-oj-action="[[() => deleteTodo(cell.item.data.id)]]"
-                    chroming="borderless"
-                  >
-                    Change status
-                  </oj-button> -->
                 </oj-option>
 
                 <oj-option value="change">
@@ -161,6 +171,17 @@
                 </oj-option>
               </oj-menu>
             </oj-menu-button>
+          </template>
+
+          <template slot="tagsTemplate" data-oj-as="cell">
+            <oj-bind-for-each data="[[$current.data]]">
+              <template>
+                <span class="oj-badge oj-badge-danger oj-badge-subtle"><oj-bind-text value="[[$current.data.name]]"></oj-bind-text></span>
+
+
+              </template>
+
+            </oj-bind-for-each>
           </template>
         </oj-table>
       </div>
